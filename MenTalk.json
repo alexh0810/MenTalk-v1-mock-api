@@ -1,0 +1,257 @@
+{
+  "uuid": "77248969-fa56-4db6-b80b-883c6313da92",
+  "lastMigration": 24,
+  "name": "MenTalk",
+  "endpointPrefix": "",
+  "latency": 0,
+  "port": 3001,
+  "hostname": "0.0.0.0",
+  "routes": [
+    {
+      "uuid": "3289ef86-fa0a-4981-8283-7119d9e494ef",
+      "documentation": "Get all profiles",
+      "method": "get",
+      "endpoint": "profiles",
+      "responses": [
+        {
+          "uuid": "89b2c0f0-4971-4d40-9b2e-0678e515cf2a",
+          "body": "{\n  {\n  \"id\": \"1\",\n  \"first_name\": \"Alex\", \n  \"last_name\": \"Kay\",\n  \"school\": \"HaagaHelia UAS\",\n  \"description\": \"A short introduction about myself\",\n  \"role\": \"mentor\",\n}, \n{\n  \"id\": \"2\",\n  \"first_name\": \"Alex\", \n  \"last_name\": \"Kay\",\n  \"school\": \"HaagaHelia UAS\",\n  \"description\": \"A short introduction about myself\",\n  \"role\": \"mentee\",\n}, \n{\n  \"id\": \"3\",\n  \"first_name\": \"Alex\", \n  \"last_name\": \"Kay\",\n  \"school\": \"HaagaHelia UAS\",\n  \"description\": \"A short introduction about myself\",\n  \"role\": \"mentee\",\n}\n}",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "",
+          "headers": [],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true
+        }
+      ],
+      "enabled": true,
+      "responseMode": null
+    },
+    {
+      "uuid": "04365069-1923-4f80-b408-38065b92eb42",
+      "documentation": "Get all profiles that are mentors ",
+      "method": "get",
+      "endpoint": "profile",
+      "responses": [
+        {
+          "uuid": "378811b5-e8a3-4b2d-894b-c81437474638",
+          "body": "{\n  {\n  \"id\": \"1\",\n  \"first_name\": \"Alex\", \n  \"last_name\": \"Kay\",\n  \"school\": \"HaagaHelia UAS\",\n  \"description\": \"A short introduction about myself\",\n  \"role\": \"{{queryParam 'role'}}\",\n}, \n{\n  \"id\": \"2\",\n  \"first_name\": \"Alex\", \n  \"last_name\": \"Kay\",\n  \"school\": \"HaagaHelia UAS\",\n  \"description\": \"A short introduction about myself\",\n  \"role\": \"{{queryParam 'role'}}\",\n}, \n{\n  \"id\": \"3\",\n  \"first_name\": \"Alex\", \n  \"last_name\": \"Kay\",\n  \"school\": \"HaagaHelia UAS\",\n  \"description\": \"A short introduction about myself\",\n  \"role\": \"{{queryParam 'role'}}\",\n}\n}\n",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "",
+          "headers": [],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [
+            {
+              "target": "body",
+              "modifier": "role",
+              "value": "mentor",
+              "invert": false,
+              "operator": "equals"
+            }
+          ],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true
+        }
+      ],
+      "enabled": true,
+      "responseMode": null
+    },
+    {
+      "uuid": "8585c386-b065-4184-ad9c-d453259c4ffa",
+      "documentation": "",
+      "method": "get",
+      "endpoint": "profile/:id",
+      "responses": [
+        {
+          "uuid": "3305349b-600c-44f1-a861-2e694a3d7203",
+          "body": "{\n  \"id\": \"{{urlParam 'id'}}\",\n  \"first_name\": \"Alex\", \n  \"last_name\": \"Kay\",\n  \"school\": \"HaagaHelia UAS\",\n  \"description\": \"A short introduction about myself\",\n  \"role\": \"mentor\"\n}",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "",
+          "headers": [],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true
+        }
+      ],
+      "enabled": true,
+      "responseMode": null
+    },
+    {
+      "uuid": "05aa2f8b-9a90-4ee3-be84-5eb593f33510",
+      "documentation": "Create a new profile",
+      "method": "post",
+      "endpoint": "profile",
+      "responses": [
+        {
+          "uuid": "1167e110-f5d1-488c-a884-2bc9881aa224",
+          "body": "{\n \"id\": \"4\", \n \"first_name\": \"{{body 'first_name'}}\",\n \"last_name\": \"{{body 'last_name'}}\",\n \"role\": \"{{body 'role'}}\",\n \"description\": \"{{body 'description'}}\", \n \"school\": \"{{body 'school'}}\"\n}",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "",
+          "headers": [],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [
+            {
+              "target": "body",
+              "modifier": "first_name",
+              "value": "([A-Z])\\w+",
+              "invert": false,
+              "operator": "regex"
+            },
+            {
+              "target": "body",
+              "modifier": "last_name",
+              "value": "([A-Z])\\w+",
+              "invert": false,
+              "operator": "regex"
+            },
+            {
+              "target": "body",
+              "modifier": "role",
+              "value": "mentee|mentor",
+              "invert": false,
+              "operator": "regex"
+            },
+            {
+              "target": "body",
+              "modifier": "school",
+              "value": "([A-Z])\\w+",
+              "invert": false,
+              "operator": "regex"
+            },
+            {
+              "target": "body",
+              "modifier": "description",
+              "value": "([A-Z])\\w+",
+              "invert": false,
+              "operator": "equals"
+            }
+          ],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true
+        }
+      ],
+      "enabled": true,
+      "responseMode": null
+    },
+    {
+      "uuid": "73e6eb5e-aab7-4cbd-8953-5b6c32df3a1b",
+      "documentation": "Edit profile description",
+      "method": "put",
+      "endpoint": "profile/:id",
+      "responses": [
+        {
+          "uuid": "5e87ca03-6ece-44da-943d-b61577eec7ea",
+          "body": "{\n\"id\": \"4\", \n \"first_name\": \"Hary\",\n \"last_name\": \"Styles\",\n \"role\": \"mentor\",\n \"description\": \"{{body 'description'}}\", \n \"school\": \"Metropolia UAS\"\n}",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "",
+          "headers": [],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [
+            {
+              "target": "body",
+              "modifier": "description",
+              "value": "([A-Z])\\w+",
+              "invert": false,
+              "operator": "equals"
+            }
+          ],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true
+        }
+      ],
+      "enabled": true,
+      "responseMode": null
+    },
+    {
+      "uuid": "5665affc-ffd1-40bd-9186-d9b3b974dca6",
+      "documentation": "Delete profile",
+      "method": "delete",
+      "endpoint": "profile/:id",
+      "responses": [
+        {
+          "uuid": "046267b4-77b1-421c-9b6f-11dab9148948",
+          "body": "{\n  \"message\": \"Profile successfully deleted!\"\n}",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "",
+          "headers": [],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true
+        }
+      ],
+      "enabled": true,
+      "responseMode": null
+    }
+  ],
+  "proxyMode": false,
+  "proxyHost": "",
+  "proxyRemovePrefix": false,
+  "tlsOptions": {
+    "enabled": false,
+    "type": "CERT",
+    "pfxPath": "",
+    "certPath": "",
+    "keyPath": "",
+    "caPath": "",
+    "passphrase": ""
+  },
+  "cors": true,
+  "headers": [
+    {
+      "key": "Content-Type",
+      "value": "application/json"
+    }
+  ],
+  "proxyReqHeaders": [
+    {
+      "key": "",
+      "value": ""
+    }
+  ],
+  "proxyResHeaders": [
+    {
+      "key": "",
+      "value": ""
+    }
+  ],
+  "data": []
+}
